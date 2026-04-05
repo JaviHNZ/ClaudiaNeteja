@@ -1,0 +1,22 @@
+<nav class="navbar">
+
+  <div class="left">
+    <span class="logo">Claudia Neteja</span>
+  </div>
+
+  <div class="center">
+    <a routerLink="/home">Home</a>
+    <a routerLink="/registros">Registros</a>
+
+    <!-- SOLO ADMIN -->
+    <a *ngIf="rol === 'admin'" routerLink="/admin">
+      Admin
+    </a>
+  </div>
+
+  <div class="right">
+    <span class="user">👤 {{ nombre }}</span>
+    <button (click)="logout()">Salir</button>
+  </div>
+
+</nav>

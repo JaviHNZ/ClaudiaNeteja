@@ -1,0 +1,34 @@
+<h2 class="titulo">📊 Panel Admin</h2>
+
+<div class="grid">
+
+  <div 
+    *ngFor="let t of trabajadores" 
+    class="card trabajador"
+    (click)="verDetalle(t)"
+  >
+    
+    <div class="top">
+      <div class="avatar">
+        👷
+      </div>
+
+      <div class="info">
+        <div class="nombre">{{ t.nombre }}</div>
+        <div class="rol">Trabajador</div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="horas">
+        ⏱ {{ t.total_horas || 0 }} horas
+      </div>
+
+      <div class="ver">
+        Ver detalle →
+      </div>
+    </div>
+
+  </div>
+
+</div>

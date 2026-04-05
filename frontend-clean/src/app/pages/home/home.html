@@ -1,0 +1,19 @@
+<div class="home-container">
+
+  <h1>Hola {{ nombre }} 👋</h1>
+  <p>¿Qué quieres hacer hoy?</p>
+
+  <div class="cards">
+
+    <div class="card" (click)="irRegistros()">
+      📝 Registrar horas
+    </div>
+
+    <!-- SOLO ADMIN -->
+    <div class="card admin" *ngIf="rol === 'admin'" (click)="irAdmin()">
+      👑 Panel Admin
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+.home-container {
+  padding: 40px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  padding: 30px;
+  width: 200px;
+  border-radius: 15px;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.admin {
+  background: #e53e3e;
+}

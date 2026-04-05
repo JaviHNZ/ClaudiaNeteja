@@ -1,0 +1,63 @@
+<div class="container">
+  <h2>Registrar horas</h2>
+
+  <!--  Fecha -->
+  <input [(ngModel)]="fecha" type="date" />
+
+  <!--  Casa -->
+  <input type="text" [(ngModel)]="busquedaCasa" (input)="buscarCasa()" placeholder="Buscar casa..." />
+
+  <div *ngIf="resultadosCasas.length > 0" class="autocomplete">
+    <div *ngFor="let c of resultadosCasas" (mousedown)="seleccionarCasa(c)" class="item">
+      {{ c.nombre }}
+    </div>
+  </div>
+
+  <!--  Horas -->
+  <input [(ngModel)]="horas" type="number" />
+
+  <!--  Guardar -->
+  <button (click)="guardar()">Guardar</button>
+
+  <hr>
+
+  <!--  CAMBIO DE MES -->
+<div class="mes-control">
+  <button class="mes-btn" (click)="cambiarMes(-1)">←</button>
+
+  <div class="mes-label">
+    {{ getNombreMes() }} {{ anioActual }}
+  </div>
+
+  <button class="mes-btn" (click)="cambiarMes(1)">→</button>
+</div>
+
+  <h3 style="background: #e3f2fd; padding: 10px; border-radius: 8px;">
+    ⏱ Total del mes: {{ getTotalHorasMes() }} horas
+  </h3>
+
+
+  <h3>Mis registros</h3>
+
+  <!--  SOLO UN NGFOR (FILTRADO POR MES) -->
+  <div *ngFor="let r of getRegistrosMes()" class="card">
+
+    <div>📅 {{ formatearFecha(r.fecha) }}</div>
+    <div>🏠 {{ r.casa_nombre }}</div>
+
+    <!--  MODO NORMAL -->
+    <div *ngIf="editandoId !== r.id">
+      ⏱ {{ r.horas }} horas
+      <button (click)="iniciarEdicion(r)">✏️</button>
+      <button (click)="eliminar(r.id)">🗑</button>
+    </div>
+
+    <!--  MODO EDICIÓN -->
+    <div *ngIf="editandoId === r.id">
+      <input type="number" [(ngModel)]="horasEdit" />
+      <button (click)="guardarEdicion(r.id)">💾</button>
+    </div>
+
+  </div>
+  <button (click)="generarPDF()">📄 Descargar PDF</button>
+</div>

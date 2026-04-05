@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="card">
+    <h2>📝 Crear cuenta</h2>
+
+    <input [(ngModel)]="nombre" placeholder="Nombre" />
+    <input [(ngModel)]="email" placeholder="Email" />
+    <input [(ngModel)]="password" type="password" placeholder="Contraseña" />
+
+    <button (click)="register()">Registrarse</button>
+
+    <p class="msg">{{ mensaje }}</p>
+  </div>
+</div>
