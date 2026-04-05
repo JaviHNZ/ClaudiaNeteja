@@ -6,7 +6,20 @@ import { db } from "../config/db.js";
 export const register = (req, res) => {
   const { nombre, email, password } = req.body;
 
-  // 🔐 encriptar contraseña
+  // 🔥 VALIDACIONES
+  if (!nombre || !email || !password) {
+    return res.status(400).json({ message: "Todos los campos son obligatorios" });
+  }
+
+  if (!email.includes("@")) {
+    return res.status(400).json({ message: "Email inválido" });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({ message: "Mínimo 6 caracteres" });
+  }
+
+  // 🔐 HASH
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   const sql = `
@@ -21,7 +34,6 @@ export const register = (req, res) => {
       if (err) {
         console.error("Error al registrar:", err);
 
-        // ⚠️ email duplicado
         if (err.code === "ER_DUP_ENTRY") {
           return res.status(400).json({ message: "Email ya registrado" });
         }
