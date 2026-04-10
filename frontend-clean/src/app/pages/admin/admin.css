@@ -1,82 +1,33 @@
-/* 🧾 TITULO */
-.titulo {
-  margin-bottom: 20px;
-  color: #1a202c;
+body {
+  background-color: #f5f7fa;
 }
 
-/* 🔥 GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
-}
-
-/* 📦 CARD */
+/* CARD */
 .trabajador {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 15px;
+  border: none;
+  border-radius: 15px;
   cursor: pointer;
-  transition: 0.2s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  transition: all 0.2s ease;
 }
 
-/* ✨ HOVER */
 .trabajador:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* 🔝 TOP */
-.top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.trabajador:active {
+  transform: scale(0.98);
 }
 
-/* 👷 AVATAR */
+/* AVATAR */
 .avatar {
-  font-size: 24px;
+  font-size: 22px;
   background: #edf2f7;
   padding: 10px;
   border-radius: 50%;
 }
 
-/* 📛 INFO */
-.info {
-  display: flex;
-  flex-direction: column;
-}
-
-.nombre {
-  font-weight: 600;
-  color: #2d3748;
-}
-
-.rol {
-  font-size: 12px;
-  color: #a0aec0;
-}
-
-/* 🔽 BOTTOM */
-.bottom {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ⏱ HORAS */
+/* TEXTO */
 .horas {
-  font-weight: bold;
-  color: #38a169;
-}
-
-/* 👉 VER */
-.ver {
-  font-size: 13px;
-  color: #3182ce;
+  font-size: 18px;
 }

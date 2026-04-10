@@ -1,30 +1,48 @@
-<div class="container text-center">
-  <h1 class="text-primary">Bootstrap activo 🚀</h1>
-</div>
-<h2 class="titulo">📊 Panel Admin</h2>
+<div class="container py-4">
 
-<div class="grid">
+  <h2 class="text-center mb-4">📊 Panel Admin</h2>
 
-  <div *ngFor="let t of trabajadores" class="card trabajador" (click)="verDetalle(t)">
+  <div class="row g-3">
 
-    <div class="top">
-      <div class="avatar">
-        👷
+    <div 
+      *ngFor="let t of trabajadores" 
+      class="col-12 col-sm-6 col-md-4 col-lg-3"
+    >
+
+      <div 
+        class="card trabajador h-100 shadow-sm" 
+        (click)="verDetalle(t)"
+      >
+
+        <div class="card-body d-flex flex-column justify-content-between">
+
+          <!-- TOP -->
+          <div class="d-flex align-items-center mb-3">
+            <div class="avatar me-2">
+              👷
+            </div>
+
+            <div>
+              <div class="fw-bold">{{ t.nombre }}</div>
+              <div class="text-muted small">Trabajador</div>
+            </div>
+          </div>
+
+          <!-- BOTTOM -->
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="text-success fw-bold">
+              ⏱ {{ formatearHoras(t.total_horas || 0) }}
+            </div>
+
+            <div class="text-primary small">
+              Ver detalle →
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
-      <div class="info">
-        <div class="nombre">{{ t.nombre }}</div>
-        <div class="rol">Trabajador</div>
-      </div>
-    </div>
-
-    <div class="bottom">
-      <div class="horas">
-        ⏱ {{ formatearHoras(t.total_horas || 0) }} </div>
-
-      <div class="ver">
-        Ver detalle →
-      </div>
     </div>
 
   </div>
