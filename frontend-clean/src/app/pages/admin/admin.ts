@@ -36,4 +36,10 @@ ngOnInit() {
 verDetalle(trabajador: any) {
   this.router.navigate(['/admin/usuario', trabajador.id]);
 }
+formatearHoras(h: number) {
+  const horas = Math.floor(h);
+  const minutos = Math.round((h - horas) * 60);
+
+  return `${horas}h ${minutos}min`;
+}
 }

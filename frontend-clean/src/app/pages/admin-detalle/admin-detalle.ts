@@ -11,7 +11,6 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./admin-detalle.css'],
 })
 export class AdminDetalle implements OnInit {
-
   registros: any[] = [];
   registrosFiltrados: any[] = [];
 
@@ -20,49 +19,47 @@ export class AdminDetalle implements OnInit {
 
   id: number = 0;
 
-constructor(
-  private route: ActivatedRoute,
-  private api: ApiService,
-  private cd: ChangeDetectorRef
-) {}
+  constructor(
+    private route: ActivatedRoute,
+    private api: ApiService,
+    private cd: ChangeDetectorRef,
+  ) {}
 
-ngOnInit() {
-  this.route.paramMap.subscribe(params => {
-    this.id = Number(params.get('id'));
-    this.cargarRegistros();
-  });
-}
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.id = Number(params.get('id'));
+      this.cargarRegistros();
+    });
+  }
 
   // 🔥 cargar registros
- cargarRegistros() {
-  this.api.getRegistrosPorUsuario(this.id).subscribe({
-    next: (res: any) => {
-      this.registros = res;
+  cargarRegistros() {
+    this.api.getRegistrosPorUsuario(this.id).subscribe({
+      next: (res: any) => {
+        this.registros = res.sort((a: any, b: any) => {
+          return new Date(a.fecha).getTime() - new Date(b.fecha).getTime();
+        });
+        this.actualizarFiltrado();
 
-      this.actualizarFiltrado();
-
-      // 🔥 FORZAR ACTUALIZACIÓN (ESTA ES LA CLAVE)
-      this.cd.detectChanges();
-    },
-    error: (err) => console.error(err),
-  });
-}
+        // 🔥 FORZAR ACTUALIZACIÓN (ESTA ES LA CLAVE)
+        this.cd.detectChanges();
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
   // 🔥 filtrar por mes
   actualizarFiltrado() {
     this.registrosFiltrados = this.registros.filter((r) => {
       const fecha = new Date(r.fecha);
 
-      return (
-        fecha.getMonth() === this.mesActual &&
-        fecha.getFullYear() === this.anioActual
-      );
+      return fecha.getMonth() === this.mesActual && fecha.getFullYear() === this.anioActual;
     });
   }
 
   // 🔥 total (usar filtrados)
   getTotalMes() {
-    return this.registrosFiltrados.reduce((t, r) => t + r.horas, 0);
+    return this.registrosFiltrados.reduce((t, r) => t + Number(r.horas), 0);
   }
 
   // 🔥 cambiar mes
@@ -91,11 +88,26 @@ ngOnInit() {
   // 🔥 nombre mes
   getNombreMes() {
     const meses = [
-      'Enero','Febrero','Marzo','Abril',
-      'Mayo','Junio','Julio','Agosto',
-      'Septiembre','Octubre','Noviembre','Diciembre'
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'Octubre',
+      'Noviembre',
+      'Diciembre',
     ];
 
     return meses[this.mesActual];
+  }
+  formatearHoras(h: number) {
+    const horas = Math.floor(h);
+    const minutos = Math.round((h - horas) * 60);
+
+    return `${horas}h ${minutos}min`;
   }
 }

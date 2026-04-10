@@ -1,37 +1,36 @@
 <div class="container">
 
   <div class="mes-control">
-  <button class="mes-btn" (click)="cambiarMes(-1)">←</button>
+    <button class="mes-btn" (click)="cambiarMes(-1)">←</button>
 
-  <div class="mes-label">
-    {{ getNombreMes() }} {{ anioActual }}
+    <div class="mes-label">
+      {{ getNombreMes() }} {{ anioActual }}
+    </div>
+
+    <button class="mes-btn" (click)="cambiarMes(1)">→</button>
   </div>
 
-  <button class="mes-btn" (click)="cambiarMes(1)">→</button>
-</div>
-
-  <h2>👤 Detalle trabajador</h2>
+  <h2>👤 Detalle trabajador </h2>
 
   <!-- 🔥 LISTA -->
   <div *ngIf="registros.length > 0; else sinDatos">
 
- <div *ngFor="let r of registrosFiltrados" class="card">
+    <div *ngFor="let r of registrosFiltrados" class="card">
 
-  <div class="info">
-    <div class="casa">🏠 {{ r.casa_nombre }}</div>
-    <div class="fecha">📅 {{ formatearFecha(r.fecha) }}</div>
-  </div>
+      <div class="info">
+        <div class="casa">🏠 {{ r.casa_nombre }}</div>
+        <div class="fecha">📅 {{ formatearFecha(r.fecha) }}</div>
+      </div>
 
-  <div class="horas">
-    ⏱ {{ r.horas }}h
-  </div>
+      <div class="horas">
+        ⏱ {{ formatearHoras(r.horas) }} </div>
 
-</div>
+    </div>
 
     <!-- 🔥 TOTAL -->
-  <div class="total">
-  🧮 Total del mes: <strong>{{ getTotalMes() }} horas</strong>
-</div>
+    <div class="total">
+      🧮 Total del mes: <strong>{{ formatearHoras(getTotalMes()) }}</strong>
+    </div>
   </div>
 
   <!-- ❌ VACIO -->

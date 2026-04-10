@@ -2,12 +2,8 @@
 
 <div class="grid">
 
-  <div 
-    *ngFor="let t of trabajadores" 
-    class="card trabajador"
-    (click)="verDetalle(t)"
-  >
-    
+  <div *ngFor="let t of trabajadores" class="card trabajador" (click)="verDetalle(t)">
+
     <div class="top">
       <div class="avatar">
         👷
@@ -21,8 +17,7 @@
 
     <div class="bottom">
       <div class="horas">
-        ⏱ {{ t.total_horas || 0 }} horas
-      </div>
+        ⏱ {{ formatearHoras(t.total_horas || 0) }} </div>
 
       <div class="ver">
         Ver detalle →
