@@ -4,8 +4,8 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-landing',
   standalone: true,
+  imports: [RouterModule], // 🔥 ESTO FALTABA
   templateUrl: './landing.html',
   styleUrls: ['./landing.css'],
-  imports: [RouterModule],
 })
 export class Landing {}
