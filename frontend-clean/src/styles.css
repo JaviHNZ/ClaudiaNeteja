@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+/* 🌞 LIGHT MODE (default) */
+body {
+  background: #f5f7fa;
+  color: #1a202c;
+  transition: 0.3s;
+}
+
+/* 🌙 DARK MODE */
+body.dark {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* NAVBAR */
+body.dark .navbar {
+  background: #1f2937;
+}
+
+/* CARDS */
+body.dark .card {
+  background: #1e1e1e;
+  color: white;
+}
+
+/* INPUTS */
+body.dark input {
+  background: #2a2a2a;
+  color: white;
+  border: 1px solid #444;
+}
+
+/* BOTONES */
+body.dark button {
+  background: #333;
+  color: white;
+}

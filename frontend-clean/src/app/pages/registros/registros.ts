@@ -39,12 +39,12 @@ export class Registros implements OnInit {
     this.cargarRegistros();
   }
   iniciarEdicion(r: any) {
-  this.editandoId = r.id;
+    this.editandoId = r.id;
 
-  // 🔥 convertir decimal → horas + minutos
-  this.horasInput = Math.floor(r.horas);
-  this.minutosInput = Math.round((r.horas - this.horasInput) * 60);
-}
+    // 🔥 convertir decimal → horas + minutos
+    this.horasInput = Math.floor(r.horas);
+    this.minutosInput = Math.round((r.horas - this.horasInput) * 60);
+  }
   // 🔥 CARGAR CASAS
   cargarCasas() {
     this.api.getCasas().subscribe({
@@ -60,8 +60,12 @@ export class Registros implements OnInit {
   cargarRegistros() {
     this.api.getRegistros().subscribe({
       next: (res: any) => {
-        this.registros = [...res]; // 🔥 nueva referencia SIEMPRE
-        this.cd.detectChanges(); // 🔥 fuerza actualización
+        // 🔥 ORDENAR POR FECHA
+        this.registros = res.sort((a: any, b: any) => {
+          return new Date(a.fecha).getTime() - new Date(b.fecha).getTime();
+        });
+
+        this.cd.detectChanges();
       },
       error: (err) => console.error(err),
     });
@@ -76,28 +80,30 @@ export class Registros implements OnInit {
   }
 
   // 🔥 GUARDAR
-guardar() {
-  if (!this.casa_id) return;
+  guardar() {
+    if (!this.casa_id) return;
 
-  // 🔥 convertir a decimal
-  const horasDecimal = this.horasInput + (this.minutosInput / 60);
+    // 🔥 convertir a decimal
+    const horasDecimal = this.horasInput + this.minutosInput / 60;
 
-  this.api.crearRegistro({
-    fecha: this.fecha,
-    horas: horasDecimal,
-    casa_id: this.casa_id
-  }).subscribe({
-    next: () => {
-      this.cargarRegistros();
+    this.api
+      .crearRegistro({
+        fecha: this.fecha,
+        horas: horasDecimal,
+        casa_id: this.casa_id,
+      })
+      .subscribe({
+        next: () => {
+          this.cargarRegistros();
 
-      this.fecha = '';
-      this.horasInput = 0;
-      this.minutosInput = 0;
-      this.busquedaCasa = '';
-      this.casa_id = null;
-    }
-  });
-}
+          this.fecha = '';
+          this.horasInput = 0;
+          this.minutosInput = 0;
+          this.busquedaCasa = '';
+          this.casa_id = null;
+        },
+      });
+  }
 
   // 🔥 NOMBRE CASA
   getCasaNombre(id: number) {
@@ -111,25 +117,27 @@ guardar() {
     const f = new Date(fecha);
     return f.toLocaleDateString();
   }
-guardarEdicion(id: number) {
-  const horasDecimal = this.horasInput + (this.minutosInput / 60);
+  guardarEdicion(id: number) {
+    const horasDecimal = this.horasInput + this.minutosInput / 60;
 
-  this.api.editarRegistro(id, {
-    horas: horasDecimal,
-  }).subscribe({
-    next: () => {
-      // actualizar frontend
-      this.registros = this.registros.map((r) =>
-        r.id === id ? { ...r, horas: horasDecimal } : r
-      );
+    this.api
+      .editarRegistro(id, {
+        horas: horasDecimal,
+      })
+      .subscribe({
+        next: () => {
+          // actualizar frontend
+          this.registros = this.registros.map((r) =>
+            r.id === id ? { ...r, horas: horasDecimal } : r,
+          );
 
-      this.editandoId = null;
-    },
-    error: (err) => {
-      console.error('ERROR:', err);
-    },
-  });
-}
+          this.editandoId = null;
+        },
+        error: (err) => {
+          console.error('ERROR:', err);
+        },
+      });
+  }
   getNombreMes() {
     const meses = [
       'Enero',
@@ -264,9 +272,8 @@ guardarEdicion(id: number) {
 
       const fechaFormateada = this.formatearFecha(fecha);
       const casas = item.casas.join(', ');
-      const horas = item.horas;
-
-      doc.text(`${index + 1}) ${fechaFormateada} - ${casas} - ${horas}h`, 10, y);
+      const horas = this.formatearHoras(item.horas);
+      doc.text(`${fechaFormateada} - ${casas} - ${horas}h`, 10, y);
 
       y += 8;
     });

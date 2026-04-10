@@ -16,14 +16,16 @@ export class Navbar implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
-    this.cargarUsuario();
+ngOnInit() {
+  this.cargarUsuario();
 
-    // 🔥 escuchar cambios de ruta (FIX del bug)
-    this.router.events.subscribe(() => {
-      this.cargarUsuario();
-    });
-  }
+  const tema = localStorage.getItem('tema') || 'light';
+  document.body.className = tema;
+
+  this.router.events.subscribe(() => {
+    this.cargarUsuario();
+  });
+}
 
   cargarUsuario() {
     this.nombre = localStorage.getItem('nombre');
@@ -36,5 +38,12 @@ export class Navbar implements OnInit {
   }
   isLogged(): boolean {
   return !!localStorage.getItem('token');
+}
+toggleTema() {
+  const actual = localStorage.getItem('tema') || 'light';
+  const nuevo = actual === 'light' ? 'dark' : 'light';
+
+  localStorage.setItem('tema', nuevo);
+  document.body.className = nuevo;
 }
 }
