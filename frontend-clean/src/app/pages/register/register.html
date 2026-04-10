@@ -1,13 +1,56 @@
-<div class="container">
-  <div class="card">
-    <h2>📝 Crear cuenta</h2>
+<div class="container d-flex justify-content-center align-items-center vh-100">
 
-    <input [(ngModel)]="nombre" placeholder="Nombre" />
-    <input [(ngModel)]="email" placeholder="Email" />
-    <input [(ngModel)]="password" type="password" placeholder="Contraseña" />
+  <div class="card shadow-lg p-4 register-card">
 
-    <button (click)="register()">Registrarse</button>
+    <h2 class="text-center mb-4">📝 Crear cuenta</h2>
 
-    <p class="msg">{{ mensaje }}</p>
+    <!-- NOMBRE -->
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nombre"
+        [(ngModel)]="nombre"
+      />
+    </div>
+
+    <!-- EMAIL -->
+    <div class="mb-3">
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Email"
+        [(ngModel)]="email"
+      />
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="mb-3">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Contraseña"
+        [(ngModel)]="password"
+      />
+    </div>
+
+    <!-- BOTÓN -->
+    <button class="btn btn-primary w-100" (click)="register()">
+      Registrarse
+    </button>
+
+    <!-- MENSAJE -->
+    <div *ngIf="mensaje" class="text-center mt-3">
+      <small class="text-muted">{{ mensaje }}</small>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="text-center mt-3">
+      <a routerLink="/login" class="text-muted small">
+        ¿Ya tienes cuenta? Inicia sesión
+      </a>
+    </div>
+
   </div>
+
 </div>

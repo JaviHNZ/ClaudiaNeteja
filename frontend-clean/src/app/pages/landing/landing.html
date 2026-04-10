@@ -1,14 +1,33 @@
+<!-- 🔝 NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+  <a class="navbar-brand fw-bold" href="#">HorasApp</a>
 
-<div class="hero">
-    <h1>Gestión de horas de limpieza</h1>
+  <div class="ms-auto">
+    <a routerLink="/login" class="btn btn-outline-light me-2">Entrar</a>
+    <a routerLink="/register" class="btn btn-primary">Crear cuenta</a>
+  </div>
+</nav>
 
-    <p>
-        Controla fácilmente las horas trabajadas, casas y trabajadores.
-        Plataforma simple y eficiente para tu empresa.
-    </p>
+<!-- 🔥 HERO -->
+<div class="container text-center py-5">
 
-    <div class="buttons">
-        <button routerLink="/login">Entrar</button>
-        <button routerLink="/register">Crear cuenta</button>
-    </div>
+  <h1 class="display-4 fw-bold mb-3">
+    Gestión de horas de limpieza
+  </h1>
+
+  <p class="lead text-muted mb-4">
+    Controla fácilmente las horas trabajadas, casas y trabajadores.
+    Plataforma simple y eficiente para tu empresa.
+  </p>
+
+  <div class="d-flex justify-content-center gap-3 flex-wrap">
+    <a routerLink="/login" class="btn btn-primary btn-lg">
+      Entrar
+    </a>
+
+    <a routerLink="/register" class="btn btn-outline-secondary btn-lg">
+      Crear cuenta
+    </a>
+  </div>
+
 </div>

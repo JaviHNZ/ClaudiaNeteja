@@ -1,21 +1,41 @@
-<div class="login-container">
-  <div class="login-card">
+<div class="container d-flex justify-content-center align-items-center vh-100">
 
-    <h2>🔐 Iniciar sesión</h2>
+  <div class="card shadow-lg p-4 login-card">
 
-    <input
-      type="email"
-      placeholder="Email"
-      [(ngModel)]="email"
-    />
+    <h2 class="text-center mb-4">🔐 Iniciar sesión</h2>
 
-    <input
-      type="password"
-      placeholder="Contraseña"
-      [(ngModel)]="password"
-    />
+    <!-- EMAIL -->
+    <div class="mb-3">
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Email"
+        [(ngModel)]="email"
+      />
+    </div>
 
-    <button (click)="login()">Entrar</button>
+    <!-- PASSWORD -->
+    <div class="mb-3">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Contraseña"
+        [(ngModel)]="password"
+      />
+    </div>
+
+    <!-- BOTÓN -->
+    <button class="btn btn-primary w-100" (click)="login()">
+      Entrar
+    </button>
+
+    <!-- EXTRA -->
+    <div class="text-center mt-3">
+      <a routerLink="/register" class="text-muted small">
+        ¿No tienes cuenta? Regístrate
+      </a>
+    </div>
 
   </div>
+
 </div>

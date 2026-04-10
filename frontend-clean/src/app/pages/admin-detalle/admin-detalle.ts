@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-admin-detalle',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './admin-detalle.html',
   styleUrls: ['./admin-detalle.css'],
 })

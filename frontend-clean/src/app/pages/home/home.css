@@ -1,30 +1,33 @@
-.home-container {
-  padding: 40px;
-  text-align: center;
+body {
+  background-color: #f5f7fa;
 }
 
-.cards {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.card {
-  padding: 30px;
-  width: 200px;
+/* CARD */
+.opcion {
+  border: none;
   border-radius: 15px;
-  background: #667eea;
-  color: white;
   cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
+  transition: all 0.25s ease;
+  padding: 20px;
 }
 
-.card:hover {
-  transform: scale(1.05);
+/* HOVER */
+.opcion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* CLICK */
+.opcion:active {
+  transform: scale(0.98);
+}
+
+/* COLORES */
+.opcion {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
 }
 
 .admin {
-  background: #e53e3e;
+  background: linear-gradient(135deg, #e53e3e, #c53030);
 }

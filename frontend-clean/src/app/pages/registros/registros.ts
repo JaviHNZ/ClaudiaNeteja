@@ -4,11 +4,11 @@ import { ApiService } from '../../services/api';
 import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-registros',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './registros.html',
   styleUrl: './registros.css',
 })

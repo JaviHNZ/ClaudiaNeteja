@@ -1,107 +1,25 @@
-/* 🔥 CONTENEDOR */
-.container {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
+body {
+  background-color: #f5f7fa;
 }
 
-/* 🧾 TITULO */
-h2 {
-  margin-bottom: 20px;
-  color: #1a202c;
-}
-
-/* 📅 CONTROL MES */
-.mes-control {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.mes-btn {
-  background: #edf2f7;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.mes-btn:hover {
-  background: #e2e8f0;
-}
-
-.mes-label {
-  font-size: 18px;
-  font-weight: 600;
-  color: #2d3748;
-  background: #f7fafc;
-  padding: 8px 16px;
-  border-radius: 8px;
-}
-
-/* 📋 CARD */
+/* CARD */
 .card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  border: 1px solid #e2e8f0;
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  border-radius: 10px;
+  border: none;
+  border-radius: 12px;
   transition: all 0.2s ease;
-  border-left: 4px solid #3182ce;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* 📦 INFO */
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+/* BOTONES MES */
+button {
+  min-width: 45px;
 }
 
-/* 🏠 CASA */
-.casa {
-  font-weight: 600;
-  color: #2b6cb0;
-  font-size: 15px;
-}
-
-/* 📅 FECHA */
-.fecha {
-  font-size: 13px;
-  color: #718096;
-}
-
-/* ⏱ HORAS */
-.horas {
+/* TOTAL */
+.alert {
   font-size: 16px;
-  font-weight: bold;
-  color: #38a169;
-}
-
-/* 📊 TOTAL */
-.total {
-  margin-top: 20px;
-  padding: 14px;
-  background: #e6f4ea;
-  border-left: 5px solid #38a169;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-/* 📭 VACIO */
-.vacio {
-  text-align: center;
-  margin-top: 40px;
-  color: #a0aec0;
-  font-size: 14px;
 }

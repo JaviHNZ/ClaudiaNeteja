@@ -1,39 +1,39 @@
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  background: #1f2937;
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
 }
 
-.links a {
-  margin-left: 15px;
-  color: white;
-  text-decoration: none;
-}
-
-.hero {
-  text-align: center;
+/* HERO */
+.container {
   margin-top: 100px;
 }
 
-.hero h1 {
-  font-size: 36px;
+/* TEXTO */
+h1 {
+  color: white;
 }
 
-.hero p {
-  color: #666;
-  margin: 20px 0;
+p {
+  color: #e2e8f0;
 }
 
-.buttons button {
-  margin: 10px;
-  padding: 12px 25px;
-  border-radius: 8px;
+/* BOTONES */
+.btn-primary {
+  background-color: #ffffff;
+  color: #4c51bf;
   border: none;
-  cursor: pointer;
 }
 
-.secondary {
-  background: #e5e7eb;
+.btn-primary:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-outline-secondary {
+  color: white;
+  border-color: white;
+}
+
+.btn-outline-secondary:hover {
+  background-color: white;
+  color: #4c51bf;
 }

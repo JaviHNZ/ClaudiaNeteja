@@ -11,7 +11,7 @@ import { authGuard } from '../../guards/auth-guard';
   //canActivate: [authGuard],
 })
 export class Home {
-  nombre = localStorage.getItem('nombre');
+  nombre = localStorage.getItem('nombre') || 'Usuario';
   rol = localStorage.getItem('rol');
 
   constructor(private router: Router) {}

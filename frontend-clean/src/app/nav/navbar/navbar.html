@@ -1,31 +1,70 @@
-<nav class="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
 
-  <div class="left">
-    <span class="logo">Claudia Neteja</span>
-  </div>
+  <!-- LOGO -->
+  <a class="navbar-brand fw-bold" routerLink="/">
+    Claudia Neteja
+  </a>
 
-  <!-- 🔓 NO LOGUEADO -->
-  <div class="center" *ngIf="!isLogged()">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/register">Register</a>
-  </div>
+  <!-- ☰ BOTÓN HAMBURGUESA -->
+  <button 
+    class="navbar-toggler" 
+    type="button" 
+    data-bs-toggle="collapse" 
+    data-bs-target="#navbarNav"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <!-- 🔐 LOGUEADO -->
-  <div class="center" *ngIf="isLogged()">
-    <a routerLink="/home">Home</a>
-    <a routerLink="/registros">Registros</a>
+  <!-- CONTENIDO -->
+  <div class="collapse navbar-collapse" id="navbarNav">
 
-    <!-- SOLO ADMIN -->
-    <a *ngIf="rol === 'admin'" routerLink="/admin">
-      Admin
-    </a>
-  </div>
+    <!-- IZQUIERDA -->
+    <ul class="navbar-nav me-auto">
 
-  <!-- 🔐 DERECHA SOLO SI LOGUEADO -->
-  <div class="right" *ngIf="isLogged()">
-    <span class="user">👤 {{ nombre }}</span>
-    <button (click)="logout()">Salir</button>
-    <button (click)="toggleTema()">🌙 Tema</button>
+      <!-- NO LOGUEADO -->
+      <ng-container *ngIf="!isLogged()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+      </ng-container>
+
+      <!-- LOGUEADO -->
+      <ng-container *ngIf="isLogged()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registros">Registros</a>
+        </li>
+
+        <!-- ADMIN -->
+        <li class="nav-item" *ngIf="rol === 'admin'">
+          <a class="nav-link" routerLink="/admin">Admin</a>
+        </li>
+      </ng-container>
+
+    </ul>
+
+    <!-- DERECHA -->
+    <div class="d-flex align-items-center gap-2" *ngIf="isLogged()">
+
+      <span class="text-white small">
+        👤 {{ nombre }}
+      </span>
+
+      <button class="btn btn-sm btn-outline-light" (click)="toggleTema()">
+        🌙
+      </button>
+
+      <button class="btn btn-sm btn-danger" (click)="logout()">
+        Salir
+      </button>
+
+    </div>
+
   </div>
 
 </nav>

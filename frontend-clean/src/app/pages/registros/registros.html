@@ -1,98 +1,151 @@
-<div class="container">
-  <h2>Registrar horas</h2>
+<div class="container py-4">
 
-  <!-- 📅 Fecha -->
-  <input [(ngModel)]="fecha" type="date" />
+  <h2 class="text-center mb-4">📝 Registrar horas</h2>
 
-  <!-- 🏠 Casa -->
-  <input 
-    type="text" 
-    [(ngModel)]="busquedaCasa" 
-    (input)="buscarCasa()" 
-    placeholder="Buscar casa..." 
-  />
+  <!-- 🔥 FORM -->
+  <div class="card p-3 shadow-sm mb-4">
 
-  <div *ngIf="resultadosCasas.length > 0" class="autocomplete">
-    <div *ngFor="let c of resultadosCasas" (mousedown)="seleccionarCasa(c)" class="item">
-      {{ c.nombre }}
+    <div class="row g-2">
+
+      <!-- FECHA -->
+      <div class="col-12 col-md-3">
+        <input [(ngModel)]="fecha" type="date" class="form-control">
+      </div>
+
+      <!-- CASA -->
+      <div class="col-12 col-md-4 position-relative">
+        <input 
+          type="text" 
+          [(ngModel)]="busquedaCasa" 
+          (input)="buscarCasa()" 
+          placeholder="Buscar casa..." 
+          class="form-control"
+        />
+
+        <!-- AUTOCOMPLETE -->
+        <div *ngIf="resultadosCasas.length > 0" class="list-group position-absolute w-100">
+          <button 
+            *ngFor="let c of resultadosCasas" 
+            (mousedown)="seleccionarCasa(c)"
+            class="list-group-item list-group-item-action"
+          >
+            {{ c.nombre }}
+          </button>
+        </div>
+      </div>
+
+      <!-- HORAS -->
+      <div class="col-6 col-md-2">
+        <input 
+          type="number" 
+          [(ngModel)]="horasInput" 
+          placeholder="Horas"
+          class="form-control"
+        >
+      </div>
+
+      <!-- MINUTOS -->
+      <div class="col-6 col-md-1">
+        <input 
+          type="number" 
+          [(ngModel)]="minutosInput" 
+          placeholder="Min"
+          max="59"
+          class="form-control"
+        >
+      </div>
+
+      <!-- BOTÓN -->
+      <div class="col-12 col-md-2">
+        <button class="btn btn-primary w-100" (click)="guardar()">
+          Guardar
+        </button>
+      </div>
+
     </div>
+
   </div>
 
-  <!-- ⏱ HORAS + MINUTOS (🔥 NUEVO PRO) -->
-  <div class="tiempo">
-    <input 
-      type="number" 
-      [(ngModel)]="horasInput" 
-      placeholder="Horas"
-      min="0"
-    >
+  <!-- 📅 MES -->
+  <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
+    <button class="btn btn-light" (click)="cambiarMes(-1)">←</button>
 
-    <input 
-      type="number" 
-      [(ngModel)]="minutosInput" 
-      placeholder="Min"
-      min="0"
-      max="59"
-    >
-  </div>
-
-  <!-- 💾 Guardar -->
-  <button (click)="guardar()">Guardar</button>
-
-  <hr>
-
-  <!-- 📅 CAMBIO DE MES -->
-  <div class="mes-control">
-    <button class="mes-btn" (click)="cambiarMes(-1)">←</button>
-
-    <div class="mes-label">
+    <div class="fw-bold">
       {{ getNombreMes() }} {{ anioActual }}
     </div>
 
-    <button class="mes-btn" (click)="cambiarMes(1)">→</button>
+    <button class="btn btn-light" (click)="cambiarMes(1)">→</button>
   </div>
 
   <!-- 📊 TOTAL -->
-  <h3 style="background: #e3f2fd; padding: 10px; border-radius: 8px;">
-    ⏱ Total del mes: {{ formatearHoras(getTotalHorasMes()) }}
-  </h3>
+  <div class="alert alert-info text-center">
+    ⏱ Total del mes: 
+    <strong>{{ formatearHoras(getTotalHorasMes()) }}</strong>
+  </div>
 
-  <h3>Mis registros</h3>
+  <h4 class="mb-3">📋 Mis registros</h4>
 
-  <!-- 📋 REGISTROS -->
-  <div *ngFor="let r of getRegistrosMes()" class="card">
+  <!-- 🔥 LISTA -->
+  <div *ngFor="let r of getRegistrosMes()" class="card shadow-sm mb-2">
 
-    <div>📅 {{ formatearFecha(r.fecha) }}</div>
-    <div>🏠 {{ r.casa_nombre }}</div>
+    <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
 
-    <!-- 🔹 MODO NORMAL -->
-    <div *ngIf="editandoId !== r.id">
-      ⏱ {{ formatearHoras(r.horas) }}
+      <!-- INFO -->
+      <div>
+        <div class="fw-bold">📅 {{ formatearFecha(r.fecha) }}</div>
+        <div class="text-muted">🏠 {{ r.casa_nombre }}</div>
+      </div>
 
-      <button (click)="iniciarEdicion(r)">✏️</button>
-      <button (click)="eliminar(r.id)">🗑</button>
-    </div>
+      <!-- NORMAL -->
+      <div *ngIf="editandoId !== r.id" class="d-flex align-items-center gap-2">
 
-    <!-- 🔹 MODO EDICIÓN -->
-    <div *ngIf="editandoId === r.id">
-      <input 
-        type="number" 
-        [(ngModel)]="horasInput" 
-        placeholder="Horas"
-      >
+        <div class="text-success fw-bold">
+          ⏱ {{ formatearHoras(r.horas) }}
+        </div>
 
-      <input 
-        type="number" 
-        [(ngModel)]="minutosInput" 
-        placeholder="Min"
-        max="59"
-      >
+        <button class="btn btn-sm btn-outline-primary" (click)="iniciarEdicion(r)">
+          ✏️
+        </button>
 
-      <button (click)="guardarEdicion(r.id)">💾</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="eliminar(r.id)">
+          🗑
+        </button>
+
+      </div>
+
+      <!-- EDITANDO -->
+      <div *ngIf="editandoId === r.id" class="d-flex gap-2">
+
+        <input 
+          type="number" 
+          [(ngModel)]="horasInput" 
+          class="form-control form-control-sm"
+          style="width: 70px;"
+        >
+
+        <input 
+          type="number" 
+          [(ngModel)]="minutosInput" 
+          max="59"
+          class="form-control form-control-sm"
+          style="width: 70px;"
+        >
+
+        <button class="btn btn-sm btn-success" (click)="guardarEdicion(r.id)">
+          💾
+        </button>
+
+      </div>
+
     </div>
 
   </div>
 
   <!-- 📄 PDF -->
-  <button (click)="generarPDF()">📄 Descargar PDF</button>
+  <div class="text-center mt-4">
+    <button class="btn btn-success" (click)="generarPDF()">
+      📄 Descargar PDF
+    </button>
+  </div>
+
 </div>
