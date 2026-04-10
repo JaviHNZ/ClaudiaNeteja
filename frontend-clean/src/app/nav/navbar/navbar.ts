@@ -32,6 +32,9 @@ export class Navbar implements OnInit {
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
+  isLogged(): boolean {
+  return !!localStorage.getItem('token');
+}
 }

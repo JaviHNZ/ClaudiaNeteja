@@ -4,7 +4,14 @@
     <span class="logo">Claudia Neteja</span>
   </div>
 
-  <div class="center">
+  <!-- 🔓 NO LOGUEADO -->
+  <div class="center" *ngIf="!isLogged()">
+    <a routerLink="/login">Login</a>
+    <a routerLink="/register">Register</a>
+  </div>
+
+  <!-- 🔐 LOGUEADO -->
+  <div class="center" *ngIf="isLogged()">
     <a routerLink="/home">Home</a>
     <a routerLink="/registros">Registros</a>
 
@@ -14,7 +21,8 @@
     </a>
   </div>
 
-  <div class="right">
+  <!-- 🔐 DERECHA SOLO SI LOGUEADO -->
+  <div class="right" *ngIf="isLogged()">
     <span class="user">👤 {{ nombre }}</span>
     <button (click)="logout()">Salir</button>
   </div>
