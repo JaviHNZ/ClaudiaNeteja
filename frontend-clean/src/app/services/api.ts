@@ -5,8 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ApiService {
-  // 🔥 CAMBIA SOLO AQUÍ
-  private API = 'https://claudianeteja.onrender.com';
+private API = 'https://claudianeteja.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
