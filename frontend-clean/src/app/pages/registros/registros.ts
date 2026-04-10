@@ -17,11 +17,10 @@ export class Registros implements OnInit {
   horas = 0;
 
   casas: any[] = [];
-casa_id: number | null = null;
+  casa_id: number | null = null;
 
   registros: any[] = [];
   editandoId: number | null = null;
-  horasEdit = 0;
 
   busquedaCasa = '';
   resultadosCasas: any[] = [];
@@ -29,18 +28,23 @@ casa_id: number | null = null;
   mesActual = new Date().getMonth(); // 0-11
   anioActual = new Date().getFullYear();
 
- constructor(
-  private api: ApiService,
-  private cd: ChangeDetectorRef
-) {}
+  horasInput = 0;
+  minutosInput = 0;
+  constructor(
+    private api: ApiService,
+    private cd: ChangeDetectorRef,
+  ) {}
   ngOnInit() {
     this.cargarCasas();
     this.cargarRegistros();
   }
   iniciarEdicion(r: any) {
-    this.editandoId = r.id;
-    this.horasEdit = r.horas;
-  }
+  this.editandoId = r.id;
+
+  // 🔥 convertir decimal → horas + minutos
+  this.horasInput = Math.floor(r.horas);
+  this.minutosInput = Math.round((r.horas - this.horasInput) * 60);
+}
   // 🔥 CARGAR CASAS
   cargarCasas() {
     this.api.getCasas().subscribe({
@@ -75,16 +79,20 @@ casa_id: number | null = null;
 guardar() {
   if (!this.casa_id) return;
 
+  // 🔥 convertir a decimal
+  const horasDecimal = this.horasInput + (this.minutosInput / 60);
+
   this.api.crearRegistro({
     fecha: this.fecha,
-    horas: this.horas,
+    horas: horasDecimal,
     casa_id: this.casa_id
   }).subscribe({
     next: () => {
-      this.cargarRegistros(); // 🔥 recarga real
+      this.cargarRegistros();
 
       this.fecha = '';
-      this.horas = 0;
+      this.horasInput = 0;
+      this.minutosInput = 0;
       this.busquedaCasa = '';
       this.casa_id = null;
     }
@@ -103,29 +111,25 @@ guardar() {
     const f = new Date(fecha);
     return f.toLocaleDateString();
   }
-  guardarEdicion(id: number) {
-    console.log('CLICK GUARDAR', id, this.horasEdit);
+guardarEdicion(id: number) {
+  const horasDecimal = this.horasInput + (this.minutosInput / 60);
 
-    this.api
-      .editarRegistro(id, {
-        horas: this.horasEdit,
-      })
-      .subscribe({
-        next: (res: any) => {
-          console.log('RESPUESTA:', res);
+  this.api.editarRegistro(id, {
+    horas: horasDecimal,
+  }).subscribe({
+    next: () => {
+      // actualizar frontend
+      this.registros = this.registros.map((r) =>
+        r.id === id ? { ...r, horas: horasDecimal } : r
+      );
 
-          this.registros = this.registros.map((r) =>
-            r.id === id ? { ...r, horas: this.horasEdit } : r,
-          );
-
-          // salir del modo edición
-          this.editandoId = null;
-        },
-        error: (err) => {
-          console.error('ERROR:', err);
-        },
-      });
-  }
+      this.editandoId = null;
+    },
+    error: (err) => {
+      console.error('ERROR:', err);
+    },
+  });
+}
   getNombreMes() {
     const meses = [
       'Enero',
@@ -156,7 +160,7 @@ guardar() {
     });
   }
   getTotalHorasMes() {
-    return this.getRegistrosMes().reduce((total, r) => total + r.horas, 0);
+    return this.getRegistrosMes().reduce((total, r) => total + Number(r.horas), 0);
   }
   getRegistrosMes() {
     return this.registros.filter((r) => {
@@ -164,6 +168,12 @@ guardar() {
 
       return fecha.getMonth() === this.mesActual && fecha.getFullYear() === this.anioActual;
     });
+  }
+  formatearHoras(h: number) {
+    const horas = Math.floor(h);
+    const minutos = Math.round((h - horas) * 60);
+
+    return `${horas}h ${minutos}min`;
   }
 
   // PROXIMAMENTE
