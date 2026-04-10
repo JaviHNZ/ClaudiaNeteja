@@ -6,6 +6,7 @@ import { Home } from './pages/home/home';
 import { authGuard } from './guards/auth-guard';
 import { adminGuard } from './guards/admin-guard';
 import { AdminDetalle } from './pages/admin-detalle/admin-detalle';
+import { Landing } from './pages/landing/landing';
 export const routes: Routes = [
   { path: 'login', component: Login },
 
@@ -33,5 +34,5 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./pages/register/register').then((m) => m.Register),
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+{ path: '', component: Landing },
 ];

@@ -1,0 +1,39 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: #1f2937;
+  color: white;
+}
+
+.links a {
+  margin-left: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.hero h1 {
+  font-size: 36px;
+}
+
+.hero p {
+  color: #666;
+  margin: 20px 0;
+}
+
+.buttons button {
+  margin: 10px;
+  padding: 12px 25px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.secondary {
+  background: #e5e7eb;
+}
