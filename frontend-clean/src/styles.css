@@ -1,5 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-/* 🌞 LIGHT MODE (default) */
+/* 🌞 LIGHT MODE */
 body {
   background: #f5f7fa;
   color: #1a202c;
@@ -8,30 +7,60 @@ body {
 
 /* 🌙 DARK MODE */
 body.dark {
-  background: #121212;
-  color: #ffffff;
+  background: #0f172a;
+  color: #e2e8f0;
 }
 
-/* NAVBAR */
+/* 🔝 NAVBAR */
 body.dark .navbar {
-  background: #1f2937;
+  background: #020617 !important;
 }
 
-/* CARDS */
+/* 📦 CARDS */
 body.dark .card {
-  background: #1e1e1e;
+  background: #1e293b;
+  color: white;
+  border: none;
+}
+
+/* 🔤 INPUTS (🔥 AQUÍ ESTABA TU FALLO) */
+body.dark input,
+body.dark .form-control {
+  background: #1e293b !important;
+  color: white !important;
+  border: 1px solid #334155;
+}
+
+body.dark input::placeholder {
+  color: #94a3b8;
+}
+
+/* 🔘 BOTONES */
+body.dark .btn-primary {
+  background: #3b82f6;
+  border: none;
+}
+
+body.dark .btn-light {
+  background: #334155;
   color: white;
 }
 
-/* INPUTS */
-body.dark input {
-  background: #2a2a2a;
+body.dark .btn-outline-secondary {
   color: white;
-  border: 1px solid #444;
+  border-color: #475569;
 }
 
-/* BOTONES */
-body.dark button {
-  background: #333;
+/* 📊 ALERTAS (🔥 tu “Total del mes”) */
+body.dark .alert {
+  background: #1e3a8a;
   color: white;
+  border: none;
+}
+
+/* 📋 LIST GROUP (autocomplete casas) */
+body.dark .list-group-item {
+  background: #1e293b;
+  color: white;
+  border-color: #334155;
 }
